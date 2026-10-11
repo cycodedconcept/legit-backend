@@ -1,0 +1,17 @@
+services:
+  mysql-test:
+    image: mysql:8.4.8
+    environment:
+      MYSQL_ROOT_PASSWORD: ${TEST_DB_ROOT_PASSWORD:?Set a disposable root password}
+      MYSQL_DATABASE: legit_test_b01
+      MYSQL_USER: legit_test
+      MYSQL_PASSWORD: ${TEST_DB_PASSWORD:?Set a disposable test password}
+    ports:
+      - '127.0.0.1:3307:3306'
+    tmpfs:
+      - /var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', '127.0.0.1']
+      interval: 2s
+      timeout: 2s
+      retries: 60
