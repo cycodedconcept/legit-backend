@@ -1,0 +1,5 @@
+
+> legit-hair-backend@0.1.0 seed:test
+> node --import tsx scripts/seed-test.ts
+
+Synthetic fixture: service_metadata.name=fixture; health routes need no fixture IDs

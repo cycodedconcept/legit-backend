@@ -1,0 +1,16 @@
+
+> legit-hair-backend@0.1.0 test:unit
+> mocha --import=tsx --timeout 15000 'test/unit/**/*.test.ts'
+
+
+
+  configuration and isolation
+    ✔ validates defaults
+    ✔ requires every database setting without leaking values
+    ✔ rejects invalid ports and production without TLS
+    ✔ fails startup safely before binding a port (2520ms)
+    ✔ refuses production, application configuration and remote database targets
+
+
+  5 passing (3s)
+

@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS service_metadata (
+  name VARCHAR(64) PRIMARY KEY,
+  value VARCHAR(255) NOT NULL
+) ENGINE=InnoDB;

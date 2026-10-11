@@ -1,0 +1,62 @@
+$ npm run test:api
+
+> legit-hair-backend@0.1.0 test:api
+> mocha --import=tsx 'test/api/**/*.test.ts'
+
+
+
+  operational HTTP contract
+    1) returns health envelope and server-generated request IDs
+    2) reports ready and recovers after a dependency outage
+    3) returns a versioned unknown-route error
+    4) rejects malformed and oversized JSON without echoing input
+    5) omits secrets and identity data from request and error logs
+
+
+  0 passing (194ms)
+  5 failing
+
+  1) operational HTTP contract
+       returns health envelope and server-generated request IDs:
+     Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:1917:21)
+      at listenInCluster (node:net:1996:12)
+      at node:net:2205:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+  2) operational HTTP contract
+       reports ready and recovers after a dependency outage:
+     Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:1917:21)
+      at listenInCluster (node:net:1996:12)
+      at node:net:2205:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+  3) operational HTTP contract
+       returns a versioned unknown-route error:
+     Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:1917:21)
+      at listenInCluster (node:net:1996:12)
+      at node:net:2205:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+  4) operational HTTP contract
+       rejects malformed and oversized JSON without echoing input:
+     Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:1917:21)
+      at listenInCluster (node:net:1996:12)
+      at node:net:2205:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+  5) operational HTTP contract
+       omits secrets and identity data from request and error logs:
+     Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:1917:21)
+      at listenInCluster (node:net:1996:12)
+      at node:net:2205:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+
+
+
+Exit code: 5

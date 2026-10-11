@@ -1,0 +1,7 @@
+$ npm run lint
+
+> legit-hair-backend@0.1.0 lint
+> eslint .
+
+
+Exit code: 0

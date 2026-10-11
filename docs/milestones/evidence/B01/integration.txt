@@ -1,0 +1,16 @@
+
+> legit-hair-backend@0.1.0 test:integration
+> mocha --import=tsx --timeout 20000 'test/integration/**/*.test.ts'
+
+
+
+  isolated real MySQL
+Database evidence: MySQL 8.4.8
+    ✔ applies clean migrations and serializes concurrent replays (144ms)
+    ✔ rejects modified applied migrations (167ms)
+    ✔ recovers DDL applied before migration history was persisted (39ms)
+    ✔ proves readiness against live MySQL and a refused connection (121ms)
+
+
+  4 passing (564ms)
+
