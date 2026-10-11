@@ -1,0 +1,42 @@
+
+> legit-hair-backend@0.1.0 test:integration
+> mocha --import=tsx --timeout 20000 'test/integration/**/*.test.ts'
+
+
+
+  isolated real MySQL
+Database evidence: MySQL 8.4.8
+    1) applies clean migrations and serializes concurrent replays
+    2) rejects modified applied migrations
+    3) recovers DDL applied before migration history was persisted
+    ✔ proves readiness against live MySQL and a refused connection (185ms)
+
+
+  1 passing (483ms)
+  3 failing
+
+  1) isolated real MySQL
+       applies clean migrations and serializes concurrent replays:
+     Error: Migration lock unavailable
+      at migrate (src/db/migrate.ts:9:40)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Promise.all (index 0)
+      at async Context.<anonymous> (test/integration/mysql.test.ts:25:5)
+
+  2) isolated real MySQL
+       rejects modified applied migrations:
+     AssertionError [ERR_ASSERTION]: The input did not match the regular expression /checksum/. Input:
+
+'Error: Migration lock unavailable'
+
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Context.<anonymous> (test/integration/mysql.test.ts:35:7)
+
+  3) isolated real MySQL
+       recovers DDL applied before migration history was persisted:
+     Error: Table 'legit_test_b01.schema_migrations' doesn't exist
+      at Context.<anonymous> (test/integration/mysql.test.ts:39:16)
+      at process.processImmediate (node:internal/timers:485:21)
+
+
+

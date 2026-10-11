@@ -1,0 +1,21 @@
+
+> legit-hair-backend@0.1.0 test:integration
+> mocha --import=tsx --timeout 20000 'test/integration/**/*.test.ts'
+
+
+
+  isolated real MySQL
+    1) "before all" hook for "applies clean migrations and serializes concurrent replays"
+
+
+  0 passing (170ms)
+  1 failing
+
+  1) isolated real MySQL
+       "before all" hook for "applies clean migrations and serializes concurrent replays":
+     Error: connect EPERM 127.0.0.1:3307 - Local (0.0.0.0:0)
+      at Context.<anonymous> (test/integration/mysql.test.ts:16:29)
+      at process.processImmediate (node:internal/timers:485:21)
+
+
+

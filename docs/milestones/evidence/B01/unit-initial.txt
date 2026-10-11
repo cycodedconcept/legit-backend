@@ -1,0 +1,27 @@
+$ npm run test:unit
+
+> legit-hair-backend@0.1.0 test:unit
+> mocha --import=tsx 'test/unit/**/*.test.ts'
+
+
+
+  configuration and isolation
+    ✔ validates defaults (58ms)
+    ✔ requires every database setting without leaking values
+    ✔ rejects invalid ports and production without TLS
+    1) fails startup safely before binding a port
+    ✔ refuses production, application configuration and remote database targets
+
+
+  4 passing (7s)
+  1 failing
+
+  1) configuration and isolation
+       fails startup safely before binding a port:
+     Error: Timeout of 2000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (/Users/mac/Documents/legit-backend-project/test/unit/config.test.ts)
+      at process.processImmediate (node:internal/timers:485:21)
+
+
+
+
+Exit code: 1

@@ -1,0 +1,174 @@
+{
+  "info": {
+    "name": "Legit Hair Backend \u2014 B01",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "noauth"
+  },
+  "item": [
+    {
+      "name": "Healthy",
+      "item": [
+        {
+          "name": "Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/health",
+            "description": "No authentication. No fixture IDs. No request body."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Request ID\", () => { pm.expect(body.meta.requestId).to.match(/^[0-9a-f-]{36}$/); pm.expect(pm.response.headers.get(\"X-Request-ID\")).to.eql(body.meta.requestId); });",
+                  "pm.test(\"Data status\", () => pm.expect(body.data.status).to.eql(\"ok\"));",
+                  "pm.test(\"No secret echo\", () => pm.expect(pm.response.text()).not.to.include(\"SECRET_SENTINEL\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Ready",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/ready",
+            "description": "No authentication. No fixture IDs. No request body."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Request ID\", () => { pm.expect(body.meta.requestId).to.match(/^[0-9a-f-]{36}$/); pm.expect(pm.response.headers.get(\"X-Request-ID\")).to.eql(body.meta.requestId); });",
+                  "pm.test(\"Data status\", () => pm.expect(body.data.status).to.eql(\"ready\"));",
+                  "pm.test(\"No secret echo\", () => pm.expect(pm.response.text()).not.to.include(\"SECRET_SENTINEL\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Unknown versioned route",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/missing",
+            "description": "No authentication. No fixture IDs. No request body."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 404\", () => pm.response.to.have.status(404));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Request ID\", () => { pm.expect(body.meta.requestId).to.match(/^[0-9a-f-]{36}$/); pm.expect(pm.response.headers.get(\"X-Request-ID\")).to.eql(body.meta.requestId); });",
+                  "pm.test(\"Error code\", () => pm.expect(body.error.code).to.eql(\"NOT_FOUND\"));",
+                  "pm.test(\"No secret echo\", () => pm.expect(pm.response.text()).not.to.include(\"SECRET_SENTINEL\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Malformed JSON",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/missing",
+            "description": "No authentication. No fixture IDs. Send exact raw malformed JSON.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"SECRET_SENTINEL\":"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Request ID\", () => { pm.expect(body.meta.requestId).to.match(/^[0-9a-f-]{36}$/); pm.expect(pm.response.headers.get(\"X-Request-ID\")).to.eql(body.meta.requestId); });",
+                  "pm.test(\"Error code\", () => pm.expect(body.error.code).to.eql(\"INVALID_JSON\"));",
+                  "pm.test(\"No secret echo\", () => pm.expect(pm.response.text()).not.to.include(\"SECRET_SENTINEL\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Database unavailable \u2014 stop MySQL first",
+      "item": [
+        {
+          "name": "Not ready",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/ready",
+            "description": "No authentication. No fixture IDs. No request body."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 503\", () => pm.response.to.have.status(503));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Request ID\", () => { pm.expect(body.meta.requestId).to.match(/^[0-9a-f-]{36}$/); pm.expect(pm.response.headers.get(\"X-Request-ID\")).to.eql(body.meta.requestId); });",
+                  "pm.test(\"Error code\", () => pm.expect(body.error.code).to.eql(\"NOT_READY\"));",
+                  "pm.test(\"No secret echo\", () => pm.expect(pm.response.text()).not.to.include(\"SECRET_SENTINEL\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Health remains available",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/health",
+            "description": "No authentication. No fixture IDs. No request body."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Request ID\", () => { pm.expect(body.meta.requestId).to.match(/^[0-9a-f-]{36}$/); pm.expect(pm.response.headers.get(\"X-Request-ID\")).to.eql(body.meta.requestId); });",
+                  "pm.test(\"Data status\", () => pm.expect(body.data.status).to.eql(\"ok\"));",
+                  "pm.test(\"No secret echo\", () => pm.expect(pm.response.text()).not.to.include(\"SECRET_SENTINEL\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

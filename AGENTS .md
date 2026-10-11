@@ -7,8 +7,8 @@ The existing PRD is the source of agreed product scope. Backend_Milestone_Plan.d
 
 ## Current milestone
 CURRENT_MILESTONE: B01
-STATUS: NOT_STARTED
-All B02–B12 milestones are NOT_STARTED. No implementation or tests were performed when this planning pack was created.
+STATUS: READY_FOR_REVIEW
+All B02–B12 milestones are NOT_STARTED. B01 implementation and required local checks are complete; see docs/milestones/B01-summary.md for evidence.
 
 ## Decisions before dependent implementation
 Record choices in docs/decisions/: Dojah identity check and consent text; seller approval policy; commission basis and rate; return window and earnings hold duration; delivery zone charges and mixed seller allocation; COD eligibility and collection reconciliation; provider accounts and email sender; hosting region, budget and domain ownership. Do independent local work while these are unresolved; do not silently invent business policy or label dependent behaviour accepted.

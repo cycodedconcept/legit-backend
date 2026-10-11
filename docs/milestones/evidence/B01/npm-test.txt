@@ -1,0 +1,52 @@
+
+> legit-hair-backend@0.1.0 test
+> npm run test:unit && npm run test:api && npm run test:integration
+
+
+> legit-hair-backend@0.1.0 test:unit
+> mocha --import=tsx --timeout 15000 'test/unit/**/*.test.ts'
+
+
+
+  configuration and isolation
+    ✔ validates defaults
+    ✔ requires every database setting without leaking values
+    ✔ rejects invalid ports and production without TLS
+    ✔ fails startup safely before binding a port (2318ms)
+    ✔ refuses production, application configuration and remote database targets
+
+
+  5 passing (2s)
+
+
+> legit-hair-backend@0.1.0 test:api
+> mocha --import=tsx 'test/api/**/*.test.ts'
+
+
+
+  operational HTTP contract
+    ✔ returns health envelope and server-generated request IDs (144ms)
+    ✔ reports ready and recovers after a dependency outage
+    ✔ returns a versioned unknown-route error
+    ✔ rejects malformed and oversized JSON without echoing input (79ms)
+    ✔ omits secrets and identity data from request and error logs
+
+
+  5 passing (312ms)
+
+
+> legit-hair-backend@0.1.0 test:integration
+> mocha --import=tsx --timeout 20000 'test/integration/**/*.test.ts'
+
+
+
+  isolated real MySQL
+Database evidence: MySQL 8.4.8
+    ✔ applies clean migrations and serializes concurrent replays (306ms)
+    ✔ rejects modified applied migrations (124ms)
+    ✔ recovers DDL applied before migration history was persisted (143ms)
+    ✔ proves readiness against live MySQL and a refused connection (135ms)
+
+
+  4 passing (937ms)
+

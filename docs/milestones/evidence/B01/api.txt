@@ -1,0 +1,16 @@
+
+> legit-hair-backend@0.1.0 test:api
+> mocha --import=tsx 'test/api/**/*.test.ts'
+
+
+
+  operational HTTP contract
+    ✔ returns health envelope and server-generated request IDs (286ms)
+    ✔ reports ready and recovers after a dependency outage (52ms)
+    ✔ returns a versioned unknown-route error
+    ✔ rejects malformed and oversized JSON without echoing input (183ms)
+    ✔ omits secrets and identity data from request and error logs (72ms)
+
+
+  5 passing (675ms)
+
