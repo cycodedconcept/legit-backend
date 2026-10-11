@@ -7,7 +7,14 @@ try {
   const config = readConfig();
   logger.level = config.LOG_LEVEL;
   const pool = createPool(config);
-  const server = createApp(readiness(pool), logger).listen(config.PORT, () => logger.info({port:config.PORT}, 'listening'));
+  const checkReady = readiness(pool);
+  const server = createApp(checkReady, logger).listen(config.PORT, () => {
+    logger.info({port:config.PORT}, 'listening');
+    void checkReady().then(
+      () => logger.info('Database connected successfully'),
+      () => logger.warn('Database connection failed; check database availability and configuration'),
+    );
+  });
   server.on('error', () => { logger.fatal('HTTP server failed'); process.exit(1); });
   let stopping = false;
   const stop = () => {
